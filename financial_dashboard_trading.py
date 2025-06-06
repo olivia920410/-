@@ -44,12 +44,15 @@ def load_data(path):
 ###### 選擇金融商品
 st.subheader("選擇金融商品: ")
 # choices = ['台積電: 2022.1.1 至 2024.4.9', '大台指2024.12到期: 2024.1 至 2024.4.9']
-choices = ['台積電: 2022.1.1 至 2024.4.9', '大台指期貨2024.12到期: 2023.12 至 2024.4.11', '小台指期貨2024.12到期: 2023.12 至 2024.4.11', '英業達2020.1.2 至 2024.4.12', '堤維西2020.1.2 至 2024.4.12']
+54
+choices = ['中鋼期貨: 2023.4.17 至 2025.4.16', '聯電期貨: 2023.4.17 至 2025.4.16', '台積電期貨: 2023.4.17 至 2025.4.16', '富邦金期貨: 2023.4.17 至 2025.4.16', '台新金期貨: 2023.4.17 至 2025.4.16'
+           ,'統一期貨: 2023.4.17 至 2025.4.16','金融期貨: 2023.4.17 至 2025.4.16','小型臺指期: 2023.4.17 至 2025.4.16','臺股期貨: 2023.4.17 至 2025.4.16','元大台灣50: 2023.4.17 至 2025.4.16','元大台灣50正2: 2023.4.17 至 2025.4.16'
+           ,'台積電: 2023.4.17 至 2025.4.16','華碩: 2023.4.17 至 2025.4.16']
 choice = st.selectbox('選擇金融商品', choices, index=0)
 ##### 读取Pickle文件
-if choice == '台積電: 2022.1.1 至 2024.4.9':
-    df_original = load_data('kbars_2330_2022-01-01-2024-04-09.pkl')
-    product_name = '台積電2330'
+if choice == '中鋼期貨: 2023.4.17 至 2025.4.16':
+    df_original = load_data('future_KBar_CBF.pkl')
+    product_name = '中鋼期貨CBF'
     # df_original = load_data('kbars_2330_2022-01-01-2024-04-09.pkl')
     # df_original = load_data('kbars_2330_2022-01-01-2022-11-18.pkl')  
     # df_original = pd.read_pickle('kbars_2330_2022-01-01-2022-11-18.pkl')
@@ -57,42 +60,89 @@ if choice == '台積電: 2022.1.1 至 2024.4.9':
     # df_original = df_original.drop('Unnamed: 0',axis=1)
 # if choice == '大台指2024.12到期: 2024.1 至 2024.4.9':
 #     df_original = load_data('kbars_TXF202412_2024-01-01-2024-04-09.pkl')  
-if choice == '大台指期貨2024.12到期: 2023.12 至 2024.4.11':
-    df_original = load_data('kbars_TXF202412_2023-12-21-2024-04-11.pkl')
-    product_name = '大台指期貨'
-if choice == '小台指期貨2024.12到期: 2023.12 至 2024.4.11':
-    df_original = load_data('kbars_MXF202412_2023-12-21-2024-04-11.pkl')
-    product_name = '小台指期貨'
-if choice == '英業達2020.1.2 至 2024.4.12':
-    df_original = load_data('kbars_2356_2020-01-01-2024-04-12.pkl')
-    product_name = '英業達2356'
-if choice == '堤維西2020.1.2 至 2024.4.12':
-    df_original = load_data('kbars_1522_2020-01-01-2024-04-12.pkl')
-    product_name = '堤維西1522'
-
+if choice == '聯電期貨: 2023.4.17 至 2025.4.16':
+    df_original = load_data('future_KBar_CCF.pkl')
+    product_name = '聯電期貨CCF'
+if choice == '台積電期貨: 2023.4.17 至 2025.4.16':
+    df_original = load_data('future_KBar_CDF.pkl')
+    product_name = '台積電期貨CDF'
+if choice == '富邦金期貨: 2023.4.17 至 2025.4.16':
+    df_original = load_data('future_KBar_CEF.pkl')
+    product_name = '富邦金期貨CEF'
+if choice == '台新金期貨: 2023.4.17 至 2025.4.16':
+    df_original = load_data('future_KBar_CMF.pkl')
+    product_name = '台新金期貨CMF'
+if choice == '統一期貨: 2023.4.17 至 2025.4.16':
+    df_original = load_data('future_KBar_CQF.pkl')
+    product_name = '統一期貨CQF'
+if choice == '金融期貨: 2023.4.17 至 2025.4.16':
+    df_original = load_data('future_KBar_FXF.pkl')
+    product_name = '金融期貨FXF'
+if choice == '小型臺指期: 2023.4.17 至 2025.4.16':
+    df_original = load_data('future_KBar_MXF.pkl')
+    product_name = '小型臺指期MXF'
+if choice == '臺股期貨: 2023.4.17 至 2025.4.16':
+    df_original = load_data('future_KBar_TXF.pkl')
+    product_name = '臺股期貨TXF'
+if choice == '元大台灣50: 2023.4.17 至 2025.4.16':
+    df_original = load_data('stock_KBar_0050.pkl')
+    product_name = '元大台灣50 0050'
+if choice == '元大台灣50正2: 2023.4.17 至 2025.4.16':
+    df_original = load_data('stock_KBar_00631L.pkl')
+    product_name = '元大台灣50正2 00631L'
+if choice == '台積電: 2023.4.17 至 2025.4.16':
+    df_original = load_data('stock_KBar_2330.pkl')
+    product_name = '台積電2330'
+if choice == '華碩: 2023.4.17 至 2025.4.16':
+    df_original = load_data('stock_KBar_2357.pkl')
+    product_name = '華碩2357'
 
 
 
 ###### 選擇資料區間
 st.subheader("選擇資料時間區間")
-if choice == '台積電: 2022.1.1 至 2024.4.9':
-    start_date = st.text_input('輸入開始日期(日期格式: 2022-01-01), 區間:2022-01-01 至 2024-04-09', '2022-01-01')
-    end_date = st.text_input('輸入結束日期 (日期格式: 2024-04-09), 區間:2022-01-01 至 2024-04-09', '2024-04-09')
-if choice == '大台指期貨2024.12到期: 2023.12 至 2024.4.11':
-    start_date = st.text_input('輸入開始日期(日期格式: 2023-12-21), 區間:2023-12-21 至 2024-04-11', '2023-12-21')
-    end_date = st.text_input('輸入結束日期 (日期格式: 2024-04-11), 區間:2023-12-21 至 2024-04-11', '2024-04-11')
-if choice == '小台指期貨2024.12到期: 2023.12 至 2024.4.11':
-    start_date = st.text_input('輸入開始日期(日期格式: 2023-12-21), 區間:2023-12-21 至 2024-04-11', '2023-12-21')
-    end_date = st.text_input('輸入結束日期 (日期格式: 2024-04-11), 區間:2023-12-21 至 2024-04-11', '2024-04-11')
-if choice == '英業達2020.1.2 至 2024.4.12':
-    start_date = st.text_input('輸入開始日期(日期格式: 2020-01-02), 區間:2020-01-02 至 2024-04-12', '2020-01-02')
-    end_date = st.text_input('輸入結束日期 (日期格式: 2024-04-12), 區間:2020-01-02 至 2024-04-12', '2024-04-12')
-if choice == '堤維西2020.1.2 至 2024.4.12':
-    start_date = st.text_input('輸入開始日期(日期格式: 2020-01-02), 區間:2020-01-02 至 2024-04-12', '2020-01-02')
-    end_date = st.text_input('輸入結束日期 (日期格式: 2024-04-12), 區間:2020-01-02 至 2024-04-12', '2024-04-12')
-
-
-
+if choice == '中鋼期貨: 2023.4.17 至 2025.4.16':
+    start_date = st.text_input('輸入開始日期(日期格式: 2023.4.17), 區間:2023.4.17 至 2025.4.16', '2023.4.17')
+    end_date = st.text_input('輸入結束日期 (日期格式: 2025.4.16), 區間:2023.4.17 至 2025.4.16', '2025.4.16')
+if choice == '聯電期貨: 2023.4.17 至 2025.4.16':
+    start_date = st.text_input('輸入開始日期(日期格式: 2023.4.17), 區間:2023.4.17 至 2025.4.16', '2023.4.17')
+    end_date = st.text_input('輸入結束日期 (日期格式: 2025.4.16), 區間:2023.4.17 至 2025.4.16', '2025.4.16')
+if choice == '台積電期貨: 2023.4.17 至 2025.4.16':
+    start_date = st.text_input('輸入開始日期(日期格式: 2023.4.17), 區間:2023.4.17 至 2025.4.16', '2023.4.17')
+    end_date = st.text_input('輸入結束日期 (日期格式:2025.4.16), 區間:2023.4.17 至 2025.4.16', '2025.4.16')
+if choice == '富邦金期貨: 2023.4.17 至 2025.4.16':
+    start_date = st.text_input('輸入開始日期(日期格式: 2023.4.17), 區間:2023.4.17 至 2025.4.16', '2023.4.17')
+    end_date = st.text_input('輸入結束日期 (日期格式: 2025.4.16), 區間:2023.4.17 至 2025.4.16', '2025.4.16')
+if choice == '台新金期貨: 2023.4.17 至 2025.4.16':
+    start_date = st.text_input('輸入開始日期(日期格式:2023.4.17), 區間:2023.4.17 至 2025.4.16', '2023.4.17')
+    end_date = st.text_input('輸入結束日期 (日期格式: 2025.4.16), 區間:2023.4.17 至 2025.4.16', '2025.4.16')
+if choice == '統一期貨: 2023.4.17 至 2025.4.16':
+    start_date = st.text_input('輸入開始日期(日期格式: 2023.4.17), 區間:2023.4.17 至 2025.4.16', '2023.4.17')
+    end_date = st.text_input('輸入結束日期 (日期格式: 2025.4.16), 區間:2023.4.17 至 2025.4.16', '2025.4.16')
+if choice == '金融期貨: 2023.4.17 至 2025.4.16':
+    start_date = st.text_input('輸入開始日期(日期格式: 2023.4.17), 區間:2023.4.17 至 2025.4.16', '2023.4.17')
+    end_date = st.text_input('輸入結束日期 (日期格式: 2025.4.16), 區間:2023.4.17 至 2025.4.16', '2025.4.16')
+if choice == '小型臺指期: 2023.4.17 至 2025.4.16':
+    start_date = st.text_input('輸入開始日期(日期格式: 2023.4.17), 區間:2023.4.17 至 2025.4.16', '2023.4.17')
+    end_date = st.text_input('輸入結束日期 (日期格式: 2025.4.16), 區間:2023.4.17 至 2025.4.16', '2025.4.16')
+if choice == '臺股期貨: 2023.4.17 至 2025.4.16':
+    start_date = st.text_input('輸入開始日期(日期格式: 2023.4.17), 區間:2023.4.17 至 2025.4.16', '2023.4.17')
+    end_date = st.text_input('輸入結束日期 (日期格式: 2025.4.16), 區間:2023.4.17 至 2025.4.16', '2025.4.16')
+if choice == '元大台灣50: 2023.4.17 至 2025.4.16':
+    start_date = st.text_input('輸入開始日期(日期格式: 2023.4.17), 區間:2023.4.17 至 2025.4.16', '2023.4.17')
+    end_date = st.text_input('輸入結束日期 (日期格式: 2025.4.16), 區間:2023.4.17 至 2025.4.16', '2025.4.16')    
+if choice == '元大台灣50正2: 2023.4.17 至 2025.4.16':
+    start_date = st.text_input('輸入開始日期(日期格式: 2023.4.17), 區間:2023.4.17 至 2025.4.16', '2023.4.17')
+    end_date = st.text_input('輸入結束日期 (日期格式: 2025.4.16), 區間:2023.4.17 至 2025.4.16', '2025.4.16') 
+if choice == '台積電: 2023.4.17 至 2025.4.16':
+    start_date = st.text_input('輸入開始日期(日期格式: 2023.4.17), 區間:2023.4.17 至 2025.4.16', '2023.4.17')
+    end_date = st.text_input('輸入結束日期 (日期格式: 2025.4.16), 區間:2023.4.17 至 2025.4.16', '2025.4.16')    
+if choice == '華碩: 2023.4.17 至 2025.4.16':
+    start_date = st.text_input('輸入開始日期(日期格式: 2023.4.17), 區間:2023.4.17 至 2025.4.16', '2023.4.17')
+    end_date = st.text_input('輸入結束日期 (日期格式: 2025.4.16), 區間:2023.4.17 至 2025.4.16', '2025.4.16')     
+    
+    
+    
 start_date = datetime.datetime.strptime(start_date,'%Y-%m-%d')
 end_date = datetime.datetime.strptime(end_date,'%Y-%m-%d')
 # 使用条件筛选选择时间区间的数据
@@ -517,7 +567,8 @@ def ChartOrder_MA(Kbar_df,TR):
     st.plotly_chart(fig5, use_container_width=True)
 
 ###### 選擇不同交易策略:
-choices_strategy = ['<進場>: 移動平均線黃金交叉作多,死亡交叉作空. <出場>: 結算平倉(期貨), 移動停損.']
+choices_strategy = ['<進場>: 移動平均線黃金交叉作多,死亡交叉作空. <出場>: 結算平倉(期貨), 移動停損.','<進場>: RSI 超買超賣作多/空. <出場>: RSI 回歸中軸, 移動停損.',
+    '<進場>: 布林通道突破邊緣作多/空. <出場>: 觸及中軌, 移動停損.' ]
 choice_strategy = st.selectbox('選擇交易策略', choices_strategy, index=0)
 
 ##### 各別不同策略
@@ -593,6 +644,191 @@ if choice_strategy == '<進場>: 移動平均線黃金交叉作多,死亡交叉�
 
     #### 繪製K線圖加上MA以及下單點位    
     ChartOrder_MA(KBar_df,OrderRecord.GetTradeRecord())
+    
+    
+    
+# 策略二：RSI 超買超賣策略
+elif choice_strategy == choices_strategy[1]:
+    st.subheader("RSI 策略參數設定:")
+    with st.expander("<策略參數設定>: 交易停損量、RSI 週期、超買區間、超賣區間、購買數量"):
+        MoveStopLoss_RSI = st.slider('選擇程式交易停損量', 0, 100, 30, key='MoveStopLoss_RSI')
+        RSI_Period = st.slider('設定計算 RSI 的 K棒週期數目(整數, 例如 14)', 1, 30, 14, key='RSI_Period')
+        RSI_Overbought = st.slider('設定 RSI 超買區間 (例如 70)', 50, 100, 70, key='RSI_Overbought')
+        RSI_Oversold = st.slider('設定 RSI 超賣區間 (例如 30)', 0, 50, 30, key='RSI_Oversold')
+        Order_Quantity_RSI = st.slider('選擇購買數量(股票單位為張數; 期貨單位為口數)', 1, 100, 1, key='Order_Quantity_RSI')
+
+        # 確保超賣 < 超買
+        if RSI_Oversold >= RSI_Overbought:
+            st.error("RSI 超賣區間必須小於超買區間，請重新設定。")
+            # 這裡可以選擇停止回測或使用預設值
+            st.stop()
+
+
+        ### 計算 RSI
+        KBar_df = Calculate_RSI(KBar_df.copy(), period=RSI_Period) # .copy() 防止 SettingWithCopyWarning
+
+        ### 尋找最後 NAN值的位置 (用於繪圖起始點)
+        if not KBar_df['RSI'].isnull().all():
+            last_nan_index_RSI_trading = KBar_df['RSI'][::-1].index[KBar_df['RSI'][::-1].isnull()][0]
+        else:
+            last_nan_index_RSI_trading = -1
+
+        ### 建立部位管理物件
+        OrderRecord_RSI = Record() # 使用不同的 Record 實例以避免混淆
+
+    #### 開始回測
+    # 注意：這裡使用 KBar_df，確保它包含了 RSI 欄位
+    for n in range(1, len(KBar_df['time'])-1): # 迴圈範圍調整以避免索引錯誤
+        # 先判斷 RSI 值是否為空值
+        if not np.isnan(KBar_df['RSI'][n-1]):
+            ## 進場: 如果無未平倉部位
+            if OrderRecord_RSI.GetOpenInterest() == 0:
+                # 多單進場: RSI 超賣區間 (從下方突破超賣線)
+                if KBar_df['RSI'][n-1] <= RSI_Oversold and KBar_df['RSI'][n] > RSI_Oversold:
+                    OrderRecord_RSI.Order('Buy', KBar_df['product'][n+1], KBar_df['time'][n+1], KBar_df['open'][n+1], Order_Quantity_RSI)
+                    OrderPrice = KBar_df['open'][n+1]
+                    StopLossPoint = OrderPrice - MoveStopLoss_RSI
+                    continue
+                # 空單進場: RSI 超買區間 (從上方跌破超買線)
+                if KBar_df['RSI'][n-1] >= RSI_Overbought and KBar_df['RSI'][n] < RSI_Overbought:
+                    OrderRecord_RSI.Order('Sell', KBar_df['product'][n+1], KBar_df['time'][n+1], KBar_df['open'][n+1], Order_Quantity_RSI)
+                    OrderPrice = KBar_df['open'][n+1]
+                    StopLossPoint = OrderPrice + MoveStopLoss_RSI
+                    continue
+            # 多單出場: 如果有多單部位
+            elif OrderRecord_RSI.GetOpenInterest() > 0:
+                ## 結算平倉(期貨才使用, 股票除非是下市櫃) - 同 MA 策略的平倉邏輯
+                if KBar_df['product'][n+1] != KBar_df['product'][n]:
+                    OrderRecord_RSI.Cover('Sell', KBar_df['product'][n], KBar_df['time'][n], KBar_df['close'][n], OrderRecord_RSI.GetOpenInterest())
+                    continue
+                # 移動停損
+                if KBar_df['close'][n] - MoveStopLoss_RSI > StopLossPoint:
+                    StopLossPoint = KBar_df['close'][n] - MoveStopLoss_RSI
+                elif KBar_df['close'][n] < StopLossPoint:
+                    OrderRecord_RSI.Cover('Sell', KBar_df['product'][n+1], KBar_df['time'][n+1], KBar_df['open'][n+1], OrderRecord_RSI.GetOpenInterest())
+                    continue
+                # RSI 回歸中軸平倉 (從超賣回到中線以上)
+                if KBar_df['RSI'][n] > 50 and KBar_df['RSI'][n-1] <= 50: # 或者您可以設定成回到超賣區間上方即平倉，例如 KBar_df['RSI'][n] > RSI_Oversold
+                    OrderRecord_RSI.Cover('Sell', KBar_df['product'][n+1], KBar_df['time'][n+1], KBar_df['open'][n+1], OrderRecord_RSI.GetOpenInterest())
+                    continue
+            # 空單出場: 如果有空單部位
+            elif OrderRecord_RSI.GetOpenInterest() < 0:
+                ## 結算平倉(期貨才使用, 股票除非是下市櫃) - 同 MA 策略的平倉邏輯
+                if KBar_df['product'][n+1] != KBar_df['product'][n]:
+                    OrderRecord_RSI.Cover('Buy', KBar_df['product'][n], KBar_df['time'][n], KBar_df['close'][n], -OrderRecord_RSI.GetOpenInterest())
+                    continue
+                # 移動停損
+                if KBar_df['close'][n] + MoveStopLoss_RSI < StopLossPoint:
+                    StopLossPoint = KBar_df['close'][n] + MoveStopLoss_RSI
+                elif KBar_df['close'][n] > StopLossPoint:
+                    OrderRecord_RSI.Cover('Buy', KBar_df['product'][n+1], KBar_df['time'][n+1], KBar_df['open'][n+1], -OrderRecord_RSI.GetOpenInterest())
+                    continue
+                # RSI 回歸中軸平倉 (從超買回到中線以下)
+                if KBar_df['RSI'][n] < 50 and KBar_df['RSI'][n-1] >= 50: # 或者您可以設定成回到超買區間下方即平倉，例如 KBar_df['RSI'][n] < RSI_Overbought
+                    OrderRecord_RSI.Cover('Buy', KBar_df['product'][n+1], KBar_df['time'][n+1], KBar_df['open'][n+1], -OrderRecord_RSI.GetOpenInterest())
+                    continue
+
+    # 處理最後未平倉部位 (如果回測結束時還有部位)
+    if OrderRecord_RSI.GetOpenInterest() != 0:
+        last_index = len(KBar_df['time']) - 1
+        last_product = KBar_df['product'][last_index]
+        last_time = KBar_df['time'][last_index]
+        last_close = KBar_df['close'][last_index]
+        if OrderRecord_RSI.GetOpenInterest() > 0:
+            OrderRecord_RSI.Cover('Sell', last_product, last_time, last_close, OrderRecord_RSI.GetOpenInterest())
+        else:
+            OrderRecord_RSI.Cover('Buy', last_product, last_time, last_close, -OrderRecord_RSI.GetOpenInterest())
+
+    #### 繪製K線圖加上RSI以及下單點位 (您需要為RSI策略調整繪圖函數，或者建立一個新的)
+    # 這裡我先用 ChartOrder_MA 作為 placeholder，但實際您可能需要客製化一個 ChartOrder_RSI
+    st.write("RSI 策略的交易圖示:")
+    ChartOrder_MA(KBar_df, OrderRecord_RSI.GetTradeRecord()) # 臨時使用MA的繪圖函數
+    
+# 策略三：布林通道逆勢策略 
+elif choice_strategy == choices_strategy[2]:
+    st.subheader("布林通道逆勢策略參數設定:")
+    with st.expander("<策略參數設定>: 交易停損量、布林通道週期、標準差倍數、購買數量"):
+        MoveStopLoss_BB = st.slider('選擇程式交易停損量', 0, 100, 30, key='MoveStopLoss_BB')
+        BB_Period = st.slider('設定布林通道的 K棒週期數目(整數, 例如 20)', 5, 50, 20, key='BB_Period')
+        BB_NumStdDev = st.slider('設定布林通道標準差倍數(例如 2.0)', 1.0, 3.0, 2.0, 0.1, key='BB_NumStdDev')
+        Order_Quantity_BB = st.slider('選擇購買數量(股票單位為張數; 期貨單位為口數)', 1, 100, 1, key='Order_Quantity_BB')
+
+        # 計算布林通道
+        KBar_df = Calculate_Bollinger_Bands(KBar_df.copy(), period=BB_Period, num_std_dev=BB_NumStdDev)
+
+        # 檢查是否有足夠的數據計算布林通道
+        if KBar_df['MiddleBand'].isnull().all():
+            st.warning("數據不足以計算布林通道，請檢查週期設定或K棒數量。")
+            st.stop() # 停止程式執行，避免報錯
+
+        ### 建立部位管理物件
+        OrderRecord_BB = Record() # 使用不同的 Record 實例
+
+    #### 開始回測
+    for n in range(1, len(KBar_df['time'])-1): # 迴圈範圍
+        # 確保布林通道值存在
+        if not np.isnan(KBar_df['MiddleBand'][n-1]):
+            ## 進場: 如果無未平倉部位
+            if OrderRecord_BB.GetOpenInterest() == 0:
+                # 多單進場: 收盤價跌破下軌 (超賣反彈)
+                if KBar_df['close'][n] < KBar_df['LowerBand'][n]:
+                    OrderRecord_BB.Order('Buy', KBar_df['product'][n+1], KBar_df['time'][n+1], KBar_df['open'][n+1], Order_Quantity_BB)
+                    OrderPrice = KBar_df['open'][n+1]
+                    StopLossPoint = OrderPrice - MoveStopLoss_BB
+                    continue
+                # 空單進場: 收盤價突破上軌 (超買回落)
+                if KBar_df['close'][n] > KBar_df['UpperBand'][n]:
+                    OrderRecord_BB.Order('Sell', KBar_df['product'][n+1], KBar_df['time'][n+1], KBar_df['open'][n+1], Order_Quantity_BB)
+                    OrderPrice = KBar_df['open'][n+1]
+                    StopLossPoint = OrderPrice + MoveStopLoss_BB
+                    continue
+            # 多單出場: 如果有多單部位
+            elif OrderRecord_BB.GetOpenInterest() > 0:
+                # 結算平倉 (期貨)
+                if KBar_df['product'][n+1] != KBar_df['product'][n]:
+                    OrderRecord_BB.Cover('Sell', KBar_df['product'][n], KBar_df['time'][n], KBar_df['close'][n], OrderRecord_BB.GetOpenInterest())
+                    continue
+                # 移動停損
+                if KBar_df['close'][n] - MoveStopLoss_BB > StopLossPoint:
+                    StopLossPoint = KBar_df['close'][n] - MoveStopLoss_BB
+                elif KBar_df['close'][n] < StopLossPoint:
+                    OrderRecord_BB.Cover('Sell', KBar_df['product'][n+1], KBar_df['time'][n+1], KBar_df['open'][n+1], OrderRecord_BB.GetOpenInterest())
+                    continue
+                # 觸及中軌平倉 (多單獲利了結或止損)
+                if KBar_df['close'][n] > KBar_df['MiddleBand'][n] and KBar_df['close'][n-1] <= KBar_df['MiddleBand'][n-1]: # 向上穿越中軌
+                    OrderRecord_BB.Cover('Sell', KBar_df['product'][n+1], KBar_df['time'][n+1], KBar_df['open'][n+1], OrderRecord_BB.GetOpenInterest())
+                    continue
+            # 空單出場: 如果有空單部位
+            elif OrderRecord_BB.GetOpenInterest() < 0:
+                # 結算平倉 (期貨)
+                if KBar_df['product'][n+1] != KBar_df['product'][n]:
+                    OrderRecord_BB.Cover('Buy', KBar_df['product'][n], KBar_df['time'][n], KBar_df['close'][n], -OrderRecord_BB.GetOpenInterest())
+                    continue
+                # 移動停損
+                if KBar_df['close'][n] + MoveStopLoss_BB < StopLossPoint:
+                    StopLossPoint = KBar_df['close'][n] + MoveStopLoss_BB
+                elif KBar_df['close'][n] > StopLossPoint:
+                    OrderRecord_BB.Cover('Buy', KBar_df['product'][n+1], KBar_df['time'][n+1], KBar_df['open'][n+1], -OrderRecord_BB.GetOpenInterest())
+                    continue
+                # 觸及中軌平倉 (空單獲利了結或止損)
+                if KBar_df['close'][n] < KBar_df['MiddleBand'][n] and KBar_df['close'][n-1] >= KBar_df['MiddleBand'][n-1]: # 向下穿越中軌
+                    OrderRecord_BB.Cover('Buy', KBar_df['product'][n+1], KBar_df['time'][n+1], KBar_df['open'][n+1], -OrderRecord_BB.GetOpenInterest())
+                    continue
+
+    # 處理最後未平倉部位
+    if OrderRecord_BB.GetOpenInterest() != 0:
+        last_index = len(KBar_df['time']) - 1
+        last_product = KBar_df['product'][last_index]
+        last_time = KBar_df['time'][last_index]
+        last_close = KBar_df['close'][last_index]
+        if OrderRecord_BB.GetOpenInterest() > 0:
+            OrderRecord_BB.Cover('Sell', last_product, last_time, last_close, OrderRecord_BB.GetOpenInterest())
+        else:
+            OrderRecord_BB.Cover('Buy', last_product, last_time, last_close, -OrderRecord_BB.GetOpenInterest())
+
+    # 繪製 K 線圖和布林通道
+    st.write("布林通道策略的交易圖示:")
+    ChartOrder_MA(KBar_df, OrderRecord_BB.GetTradeRecord()) # ChartOrder_MA 已更新可繪製布林通道
 
 ##### 繪製K線圖加上MA以及下單點位
 # @st.cache_data(ttl=3600, show_spinner="正在加載資料...")  ## Add the caching decorator
@@ -718,6 +954,7 @@ def 計算績效_大台指期貨():
     return 交易總盈虧,平均每次盈虧,平均投資報酬率,平均獲利_只看獲利的,平均虧損_只看虧損的,勝率,最大連續虧損,最大盈虧回落_MDD,報酬風險比
 
 
+
 def 計算績效_小台指期貨():
     交易總盈虧 = OrderRecord.GetTotalProfit()*50          ## 取得交易總盈虧
     平均每次盈虧 = OrderRecord.GetAverageProfit()*50         ## 取得交易 "平均" 盈虧(每次)
@@ -734,13 +971,27 @@ def 計算績效_小台指期貨():
     return 交易總盈虧,平均每次盈虧,平均投資報酬率,平均獲利_只看獲利的,平均虧損_只看虧損的,勝率,最大連續虧損,最大盈虧回落_MDD,報酬風險比
 
 
+def 計算績效_期貨():
+    交易總盈虧 = OrderRecord.GetTotalProfit()*2        ## 取得交易總盈虧
+    平均每次盈虧 = OrderRecord.GetAverageProfit()*2         ## 取得交易 "平均" 盈虧(每次)
+    平均投資報酬率 = OrderRecord.GetAverageProfitRate()    ## 取得交易 "平均" 投資報酬率(每次)  
+    平均獲利_只看獲利的 = OrderRecord.GetAverEarn()*2              ## 平均獲利(只看獲利的) 
+    平均虧損_只看虧損的 = OrderRecord.GetAverLoss()*2              ## 平均虧損(只看虧損的)
+    勝率 = OrderRecord.GetWinRate()              ## 勝率
+    最大連續虧損 = OrderRecord.GetAccLoss()*2               ## 最大連續虧損
+    最大盈虧回落_MDD = OrderRecord.GetMDD()*2                  ## 最大利潤(盈虧)回落(MDD). 這個不是一般的 "資金" 或 "投資報酬率" 的回落
+    if 最大盈虧回落_MDD>0:
+        報酬風險比 = 交易總盈虧/最大盈虧回落_MDD
+    else:
+        報酬風險比='資料不足無法計算'
+    return 交易總盈虧,平均每次盈虧,平均投資報酬率,平均獲利_只看獲利的,平均虧損_只看虧損的,勝率,最大連續虧損,最大盈虧回落_MDD,報酬風險比
 
 
 
 
 
-if choice == '台積電: 2022.1.1 至 2024.4.9':
-    交易總盈虧,平均每次盈虧,平均投資報酬率,平均獲利_只看獲利的,平均虧損_只看虧損的,勝率,最大連續虧損,最大盈虧回落_MDD,報酬風險比 = 計算績效_股票()
+if choice == '中鋼期貨: 2023.4.17 至 2025.4.16':
+    交易總盈虧,平均每次盈虧,平均投資報酬率,平均獲利_只看獲利的,平均虧損_只看虧損的,勝率,最大連續虧損,最大盈虧回落_MDD,報酬風險比 = 計算績效_期貨()
     # 交易總盈虧 = OrderRecord.GetTotalProfit()*1000          ## 取得交易總盈虧
     # 平均每次盈虧 = OrderRecord.GetAverageProfit()*1000         ## 取得交易 "平均" 盈虧(每次)
     # 平均投資報酬率 = OrderRecord.GetAverageProfitRate()    ## 取得交易 "平均" 投資報酬率(每次)  
@@ -754,8 +1005,8 @@ if choice == '台積電: 2022.1.1 至 2024.4.9':
     # else:
     #     報酬風險比='資料不足無法計算'
 
-if choice == '大台指期貨2024.12到期: 2023.12 至 2024.4.11':
-    交易總盈虧,平均每次盈虧,平均投資報酬率,平均獲利_只看獲利的,平均虧損_只看虧損的,勝率,最大連續虧損,最大盈虧回落_MDD,報酬風險比 = 計算績效_大台指期貨()
+if choice == '聯電期貨: 2023.4.17 至 2025.4.16':
+    交易總盈虧,平均每次盈虧,平均投資報酬率,平均獲利_只看獲利的,平均虧損_只看虧損的,勝率,最大連續虧損,最大盈虧回落_MDD,報酬風險比 = 計算績效_期貨()
 
     # 交易總盈虧 = OrderRecord.GetTotalProfit()*200          ## 取得交易總盈虧
     # 平均每次盈虧 = OrderRecord.GetAverageProfit() *200       ## 取得交易 "平均" 盈虧(每次)
@@ -770,8 +1021,8 @@ if choice == '大台指期貨2024.12到期: 2023.12 至 2024.4.11':
     # else:
     #     報酬風險比='資料不足無法計算'
 
-if choice == '小台指期貨2024.12到期: 2023.12 至 2024.4.11':
-    交易總盈虧,平均每次盈虧,平均投資報酬率,平均獲利_只看獲利的,平均虧損_只看虧損的,勝率,最大連續虧損,最大盈虧回落_MDD,報酬風險比 = 計算績效_小台指期貨()
+if choice == '台積電期貨: 2023.4.17 至 2025.4.16':
+    交易總盈虧,平均每次盈虧,平均投資報酬率,平均獲利_只看獲利的,平均虧損_只看虧損的,勝率,最大連續虧損,最大盈虧回落_MDD,報酬風險比 = 計算績效_期貨()
     # 交易總盈虧 = OrderRecord.GetTotalProfit()*50          ## 取得交易總盈虧
     # 平均每次盈虧 = OrderRecord.GetAverageProfit() *50       ## 取得交易 "平均" 盈虧(每次)
     # 平均投資報酬率 = OrderRecord.GetAverageProfitRate()    ## 取得交易 "平均" 投資報酬率(每次)  
@@ -785,8 +1036,8 @@ if choice == '小台指期貨2024.12到期: 2023.12 至 2024.4.11':
     # else:
     #     報酬風險比='資料不足無法計算'
 
-if choice == '英業達2020.1.2 至 2024.4.12':
-    交易總盈虧,平均每次盈虧,平均投資報酬率,平均獲利_只看獲利的,平均虧損_只看虧損的,勝率,最大連續虧損,最大盈虧回落_MDD,報酬風險比 = 計算績效_股票()
+if choice == '富邦金期貨: 2023.4.17 至 2025.4.16':
+    交易總盈虧,平均每次盈虧,平均投資報酬率,平均獲利_只看獲利的,平均虧損_只看虧損的,勝率,最大連續虧損,最大盈虧回落_MDD,報酬風險比 = 計算績效_期貨()
     # 交易總盈虧 = OrderRecord.GetTotalProfit()*1000          ## 取得交易總盈虧
     # 平均每次盈虧 = OrderRecord.GetAverageProfit()*1000         ## 取得交易 "平均" 盈虧(每次)
     # 平均投資報酬率 = OrderRecord.GetAverageProfitRate()    ## 取得交易 "平均" 投資報酬率(每次)  
@@ -800,10 +1051,24 @@ if choice == '英業達2020.1.2 至 2024.4.12':
     # else:
     #     報酬風險比='資料不足無法計算'
 
-if choice == '堤維西2020.1.2 至 2024.4.12':
+if choice == '台新金期貨: 2023.4.17 至 2025.4.16':
+    交易總盈虧,平均每次盈虧,平均投資報酬率,平均獲利_只看獲利的,平均虧損_只看虧損的,勝率,最大連續虧損,最大盈虧回落_MDD,報酬風險比 = 計算績效_期貨()
+if choice == '統一期貨: 2023.4.17至 2025.4.16 ':
+    交易總盈虧,平均每次盈虧,平均投資報酬率,平均獲利_只看獲利的,平均虧損_只看虧損的,勝率,最大連續虧損,最大盈虧回落_MDD,報酬風險比 = 計算績效_期貨()
+if choice == '金融期貨: 2023.4.17 至 2025.4.16 ':
+    交易總盈虧,平均每次盈虧,平均投資報酬率,平均獲利_只看獲利的,平均虧損_只看虧損的,勝率,最大連續虧損,最大盈虧回落_MDD,報酬風險比 = 計算績效_大台指期貨()
+if choice == '小型臺指期: 2023.4.17至 2025.4.16 ':
+    交易總盈虧,平均每次盈虧,平均投資報酬率,平均獲利_只看獲利的,平均虧損_只看虧損的,勝率,最大連續虧損,最大盈虧回落_MDD,報酬風險比 = 計算績效_小台指期貨()
+if choice == '臺股期貨: 2023.4.17至 2025.4.16 ':
+    交易總盈虧,平均每次盈虧,平均投資報酬率,平均獲利_只看獲利的,平均虧損_只看虧損的,勝率,最大連續虧損,最大盈虧回落_MDD,報酬風險比 = 計算績效_大台指期貨()
+if choice == '元大台灣50: 2023.4.17至 2025.4.16 ':
     交易總盈虧,平均每次盈虧,平均投資報酬率,平均獲利_只看獲利的,平均虧損_只看虧損的,勝率,最大連續虧損,最大盈虧回落_MDD,報酬風險比 = 計算績效_股票()
-
-
+if choice == '元大台灣50正2: 2023.4.17至 2025.4.16 ':
+    交易總盈虧,平均每次盈虧,平均投資報酬率,平均獲利_只看獲利的,平均虧損_只看虧損的,勝率,最大連續虧損,最大盈虧回落_MDD,報酬風險比 = 計算績效_股票()
+if choice == '台積電: 2023.4.17至 2025.4.16 ':
+    交易總盈虧,平均每次盈虧,平均投資報酬率,平均獲利_只看獲利的,平均虧損_只看虧損的,勝率,最大連續虧損,最大盈虧回落_MDD,報酬風險比 = 計算績效_股票()
+if choice == '華碩: 2023.4.17 至 2025.4.16':
+    交易總盈虧,平均每次盈虧,平均投資報酬率,平均獲利_只看獲利的,平均虧損_只看虧損的,勝率,最大連續虧損,最大盈虧回落_MDD,報酬風險比 = 計算績效_股票()
 
 # OrderRecord.GetCumulativeProfit()         ## 累計盈虧
 # OrderRecord.GetCumulativeProfit_rate()    ## 累計投資報酬率
@@ -851,17 +1116,32 @@ else:
 
 
 ##### 畫累計盈虧圖:
-if choice == '台積電: 2022.1.1 至 2024.4.9':
+if choice ==choices[0]  :  ##'中鋼期貨: 2023.4.17 至 2025.4.16'
+    OrderRecord.GeneratorProfitChart(choice='future',StrategyName='MA')
+if choice ==choices[1]  : ##'聯電期貨: 2023.4.17 至 2025.4.16':
+    OrderRecord.GeneratorProfitChart(choice='future',StrategyName='MA')
+if choice == choices[2]  :##'台積電期貨: 2023.4.17 至 2025.4.16':
+    OrderRecord.GeneratorProfitChart(choice='future',StrategyName='MA')
+if choice ==choices[3]  : ##'富邦金期貨: 2023.4.17 至 2025.4.16':
+    OrderRecord.GeneratorProfitChart(choice='future',StrategyName='MA')
+if choice ==choices[4]  : ##'台新金期貨: 2023.4.17 至 2025.4.16':
+    OrderRecord.GeneratorProfitChart(choice='future',StrategyName='MA')
+if choice ==choices[5]  : ##'統一期貨: 2023.4.17 至 2025.4.16':
+    OrderRecord.GeneratorProfitChart(choice='future',StrategyName='MA')
+if choice ==choices[6]  : ##'金融期貨: 2023.4.17 至 2025.4.16':
+    OrderRecord.GeneratorProfitChart(choice='future',StrategyName='MA')
+if choice ==choices[7]  : ##'小型臺指期: 2023.4.17 至 2025.4.16':
+    OrderRecord.GeneratorProfitChart(choice='future',StrategyName='MA')
+if choice ==choices[8]  : ##'臺股期貨: 2023.4.17 至 2025.4.16':
+    OrderRecord.GeneratorProfitChart(choice='future',StrategyName='MA')
+if choice ==choices[9]  : ##'元大台灣50: 2023.4.17 至 2025.4.16':
     OrderRecord.GeneratorProfitChart(choice='stock',StrategyName='MA')
-if choice == '大台指期貨2024.12到期: 2023.12 至 2024.4.11':
-    OrderRecord.GeneratorProfitChart(choice='future1',StrategyName='MA')
-if choice == '小台指期貨2024.12到期: 2023.12 至 2024.4.11':
-    OrderRecord.GeneratorProfitChart(choice='future2',StrategyName='MA')
-if choice == '英業達2020.1.2 至 2024.4.12':
+if choice ==choices[10]  :## '元大台灣50正2: 2023.4.17 至 2025.4.16':
     OrderRecord.GeneratorProfitChart(choice='stock',StrategyName='MA')
-if choice == '堤維西2020.1.2 至 2024.4.12':
+if choice ==choices[11]  : ##'台積電: 2023.4.17 至 2025.4.16':
     OrderRecord.GeneratorProfitChart(choice='stock',StrategyName='MA')
-
+if choice ==choices[12]  :## '華碩: 2023.4.17 至 2025.4.16':
+    OrderRecord.GeneratorProfitChart(choice='stock',StrategyName='MA')
     
 
 # matplotlib.rcParams['font.family'] = 'Noto Sans CJK JP'
