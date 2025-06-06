@@ -146,7 +146,7 @@ if choice == '華碩: 2023.4.17 至 2025.4.16':
 start_date = datetime.datetime.strptime(start_date,'%Y-%m-%d')
 end_date = datetime.datetime.strptime(end_date,'%Y-%m-%d')
 # 使用条件筛选选择时间区间的数据
-KBar_df['time'] = pd.to_datetime(KBar_df['time'])
+df = df_original[(df_original['time'] >= start_date) & (df_original['time'] <= end_date)]
 
 
 #%%
